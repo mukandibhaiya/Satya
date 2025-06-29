@@ -7,42 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #000; /* Black background as per image */
-            display: flex;
-            flex-direction: column; /* Changed to column to stack elements */
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            padding-top: 20px; /* Add some top padding for mobile view */
-            padding-bottom: 20px; /* Add some bottom padding */
-        }
-        .loading-screen {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            width: 100vw;
-            background-color: #000;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 10;
-            opacity: 1;
-            transition: opacity 1s ease-in-out;
-        }
-        .loading-screen.hidden {
-            opacity: 0;
-            pointer-events: none; /* Disable interaction after hidden */
-        }
-        .loading-logo-img { /* New style for the loading screen logo image */
-            width: 150px; /* Adjusted size to be smaller */
-            height: auto; /* Maintain aspect ratio */
-            margin-bottom: 20px;
-        }
+    
         .login-container {
             background-color: #000; /* Matches body background */
             border: 1px solid #262626; /* Darker border */
@@ -276,15 +241,6 @@
     </style>
 </head>
 <body>
-
-    <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
-        <img src="https://github.com/KINGSHUBHAM-tech/Logo-cp-websp/blob/main/1658586823instagram-logo-transparent.png?raw=true"
-             alt="Instagram Logo"
-             class="loading-logo-img"
-             onerror="this.onerror=null;this.src='https://placehold.co/150x60/333/FFF?text=Instagram+Logo'">
-        <span class="meta-text">from Meta</span>
-    </div>
 
     <!-- Login Page -->
     <div id="login-page" class="login-container">
