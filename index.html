@@ -7,9 +7,20 @@
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        <style>
         body {
-            
-         login-container {
+            font-family: 'Inter', sans-serif;
+            background-color: #000; /* Black background as per image */
+            display: flex;
+            flex-direction: column; /* Changed to column to stack elements */
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding-top: 20px; /* Add some top padding for mobile view */
+            padding-bottom: 20px; /* Add some bottom padding */
+          }
+        .login-container {
             background-color: #000; /* Matches body background */
             border: 1px solid #262626; /* Darker border */
             border-radius: 8px;
